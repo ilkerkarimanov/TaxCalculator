@@ -17,7 +17,17 @@ namespace RF.Domain.Services.Taxes.Social
 
             TaxableRate rate = _taxableCriteria.GetRate();
 
-            decimal taxableAmount = rate.MaxThreshold - rate.MinThreshold;
+            decimal maxTaxableAmount = rate.MaxThreshold - rate.MinThreshold;
+            decimal taxableAmount = 0m;
+
+            if(income.Amount > rate.MaxThreshold)
+            {
+                taxableAmount = maxTaxableAmount;
+            }
+            else
+            {
+                taxableAmount = income.Amount - rate.MinThreshold;
+            }
 
             return (rate.Rate/100) * taxableAmount;
         }

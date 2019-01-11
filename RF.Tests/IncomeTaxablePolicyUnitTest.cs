@@ -47,6 +47,18 @@ namespace RF.Tests
             Assert.True(result == 0, $"Income tax for {value} should be zero.");
         }
 
+        [Theory]
+        [InlineData(980, 0)]
+        [InlineData(1000, 0)]
+        [InlineData(1001, 0.10)]
+        [InlineData(3400, 240)]
+        public void ReturnExpectedTaxableAmount(decimal income, decimal tax)
+        {
+            var result = _incomeTaxablePolicy.CalculateTax(new TaxableIncome(income));
+
+            Assert.True(result == tax, $"Income tax for {income} should be {tax}.");
+        }
+
         [Fact]
         public void ReturnTaxAmountEqualsZero()
         {
