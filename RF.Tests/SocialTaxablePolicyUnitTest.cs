@@ -52,6 +52,7 @@ namespace RF.Tests
         [InlineData(1000, 0)]
         [InlineData(1001, 0.15)]
         [InlineData(3400, 300)]
+        [InlineData(4400, 300)]
         public void ReturnExpectedTaxableAmount(decimal income, decimal tax)
         {
             var result = _socialTaxablePolicy.CalculateTax(new TaxableIncome(income));
